@@ -1,0 +1,2 @@
+module_header_tags_google_local_business_title = Do you want enable Google Local Business
+ module_header_tags_google_local_business_description = Display informations about your business gor Google

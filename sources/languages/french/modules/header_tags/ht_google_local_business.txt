@@ -1,0 +1,2 @@
+module_header_tags_google_local_business_title = Souhaitez-vous intaller Google Local Business
+ module_header_tags_google_local_business_description = affiche des informations sur la page de recherche sur votre activité
