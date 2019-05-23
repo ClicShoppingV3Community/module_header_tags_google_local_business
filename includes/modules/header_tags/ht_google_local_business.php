@@ -1,18 +1,19 @@
 <?php
   /**
- *
- *  @copyright 2008 - https://www.clicshopping.org
- *  @Brand : ClicShopping(Tm) at Inpi all right Reserved
- *  @Licence GPL 2 & MIT
- *  @licence MIT - Portion of osCommerce 2.4
- *  @Info : https://www.clicshopping.org/forum/trademark/
- *
- */
+   *
+   * @copyright 2008 - https://www.clicshopping.org
+   * @Brand : ClicShopping(Tm) at Inpi all right Reserved
+   * @Licence GPL 2 & MIT
+   * @licence MIT - Portion of osCommerce 2.4
+   * @Info : https://www.clicshopping.org/forum/trademark/
+   *
+   */
 
   use ClicShopping\OM\Registry;
   use ClicShopping\OM\CLICSHOPPING;
 
-  class ht_google_local_business {
+  class ht_google_local_business
+  {
     public $code;
     public $group;
     public $title;
@@ -38,7 +39,8 @@
 //https://www.searchcommander.com/seo-tools/structured-data-builder/
 //https://search.google.com/structured-data/testing-tool
 
-    public function execute() {
+    public function execute()
+    {
       $CLICSHOPPING_Template = Registry::get('Template');
 
       $output = '<!--  Google local business -->' . "\n";
@@ -47,19 +49,19 @@
 		{
     "@context" : "http://schema.org",
     "@type" : "LocalBusiness",
-    "@id": "' .  CLICSHOPPING::getConfig('http_server', 'Shop') . '",
+    "@id": "' . CLICSHOPPING::getConfig('http_server', 'Shop') . '",
     "image" : "' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_LOGO . '",
     "name" : "' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_NAME . '",
-    "telephone" : "' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_TELEPHONE .'",
+    "telephone" : "' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_TELEPHONE . '",
     "address": {
       "@type": "PostalAddress",
                "streetAddress" : "' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_ADDRESS . '",
                "addressLocality" : "' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_CITY . '",
-                "addressRegion" : "' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_COUNTRY .'",
+                "addressRegion" : "' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_COUNTRY . '",
                 "postalCode" : "' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_POSTALCODE . '"
                 },
     "description" : "' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_DESCRIPTION . '",
-    "url" : "' .  CLICSHOPPING::getConfig('http_server', 'Shop') . '",
+    "url" : "' . CLICSHOPPING::getConfig('http_server', 'Shop') . '",
     "logo" : "' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_LOGO . '",
 ';
 
@@ -68,7 +70,7 @@
     "geo": {
       "@type": "GeoCoordinates",
       "latitude": ' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_LATITUDE . ',
-      "longitude": ' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_LONGITUDE .'
+      "longitude": ' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_LONGITUDE . '
     },
     ';
       }
@@ -78,14 +80,14 @@
      ';
 
       if (!empty(MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_FACEBOOK)) {
-        $output .= '"' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_FACEBOOK .'", ';
+        $output .= '"' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_FACEBOOK . '", ';
       }
       if (!empty(MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_TWITTER)) {
         $output .= '"' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_TWITTER . '", ';
-       }
+      }
 
       if (!empty(MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_TWITTER)) {
-        $output .= '"' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_INSTAGRAM .'" ';
+        $output .= '"' . MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_INSTAGRAM . '" ';
       }
       $output .= ' ]';
       $output .= ' }	</script>' . "\n";
@@ -95,16 +97,19 @@
       $CLICSHOPPING_Template->addBlock($output, 'footer_scripts');
     }
 
-    public function isEnabled()  {
+    public function isEnabled()
+    {
       return $this->enabled;
     }
 
-    public function check()  {
+    public function check()
+    {
       return defined('MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_STATUS');
     }
 
 
-    public function install() {
+    public function install()
+    {
       $CLICSHOPPING_Db = Registry::get('Db');
 
       $CLICSHOPPING_Db->save('configuration', [
@@ -295,26 +300,28 @@
       );
     }
 
-    public function remove() {
+    public function remove()
+    {
       return Registry::get('Db')->exec('delete from :table_configuration where configuration_key in ("' . implode('", "', $this->keys()) . '")');
     }
 
-    public function keys() {
+    public function keys()
+    {
       return array('MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_STATUS',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_NAME',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_DESCRIPTION',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_LOGO',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_TELEPHONE',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_ADDRESS',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_CITY',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_COUNTRY',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_POSTALCODE',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_LATITUDE',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_LONGITUDE',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_FACEBOOK',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_TWITTER',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_INSTAGRAM',
-                   'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_SORT_ORDER'
-                  );
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_NAME',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_DESCRIPTION',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_LOGO',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_TELEPHONE',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_ADDRESS',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_CITY',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_COUNTRY',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_POSTALCODE',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_LATITUDE',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_LONGITUDE',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_FACEBOOK',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_TWITTER',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_URL_INSTAGRAM',
+        'MODULE_HEADER_GOOGLE_LOCAL_BUSINESS_SORT_ORDER'
+      );
     }
   }
