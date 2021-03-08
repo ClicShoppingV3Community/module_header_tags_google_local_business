@@ -14,8 +14,8 @@
 
   class ht_google_local_business
   {
-    public string $code;
-    public string $group;
+    public $code;
+    public $group;
     public string $title;
     public string $description;
     public ?int $sort_order = 0;
